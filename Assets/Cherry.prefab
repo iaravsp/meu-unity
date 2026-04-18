@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 674591713293847488}
   - component: {fileID: 7587359299188177010}
   - component: {fileID: 3450445188111285481}
+  - component: {fileID: 9218439118384428548}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Cherry
   m_TagString: "colet\xE1vel"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 6795665726009259363}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9915, y: 0.1072, z: 0}
-  m_LocalScale: {x: 0.583, y: 0.4837, z: 1}
+  m_LocalPosition: {x: 2.8446, y: 0.4206, z: 0}
+  m_LocalScale: {x: 5.840818, y: 5.0263233, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,8 +83,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.9123382, b: 0.42830187, a: 1}
+  m_Sprite: {fileID: -4570538037665054336, guid: 2bc9effc6db3a2f458822c7e82ebfea4, type: 3}
+  m_Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -129,8 +130,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -138,7 +139,34 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.08008551, y: 0.0034794584}
+      - {x: 0.048721448, y: 0.035452604}
+      - {x: 0.01961651, y: 0.058401074}
+      - {x: -0.030184584, y: 0.08125061}
+      - {x: -0.069943585, y: -0.009801511}
+      - {x: -0.08106459, y: -0.04774789}
+      - {x: -0.043438084, y: -0.083050184}
+      - {x: 0.07270588, y: -0.066810474}
   m_UseDelaunayMesh: 1
+--- !u!95 &9218439118384428548
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795665726009259363}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6908fcac370dda74e9e50133ff069546, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

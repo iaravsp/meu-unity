@@ -5,8 +5,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     AudioSource audioPlin;
-    public float speed;
+
+    public float speed = 5f;
     public float jumpForce = 10f;
+
     private bool isGrounded;
     private bool jumpRequest;
 
@@ -21,29 +23,56 @@ public class PlayerMovement : MonoBehaviour
         audioPlin = GetComponent<AudioSource>();
     }
 
-    void FixedUpdate()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        rb.MovePosition(rb.position + new Vector2(moveHorizontal, 0).normalized * speed * Time.fixedDeltaTime);
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
-        animator.SetBool("IsGrounded", isGrounded);
-
-        if (jumpRequest && isGrounded)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            jumpRequest = false;
-        }
-    }
-
     void Update()
     {
+        // Capturamos o input no Update (pois ele roda todo frame de tela)
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // 1. Movimento Horizontal usando velocidade
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        // Pega a escala atual exata que você configurou lá no Inspector
+        Vector3 escalaAtual = transform.localScale;
+
+        if (moveHorizontal > 0)
+        {
+            // Mathf.Abs garante que o número seja positivo (olhando para a direita)
+            escalaAtual.x = Mathf.Abs(escalaAtual.x);
+        }
+        else if (moveHorizontal < 0)
+        {
+            // O sinal de menos garante que fique negativo (olhando para a esquerda)
+            escalaAtual.x = -Mathf.Abs(escalaAtual.x);
+        }
+
+        // Devolve a escala com o tamanho original, mas virada para o lado certo
+        transform.localScale = escalaAtual;
+
+        rb.linearVelocity = new Vector2(moveHorizontal * speed, rb.linearVelocity.y);
+
+        // 2. Verificação do Chão
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // 3. Atualização das Animações
+        animator.SetFloat("Speed", Mathf.Abs(moveHorizontal));
+        animator.SetBool("IsGrounded", isGrounded);
+
+        // 4. Lógica de Pulo
+        if (jumpRequest)
+        {
+            if (isGrounded)
+            {
+                // Aplica a força do pulo preservando o movimento horizontal
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
+            // Independentemente de ter conseguido pular ou não, limpamos o pedido
+            // Isso evita que o botão fique "preso" e ele pule sozinho ao pousar
+            jumpRequest = false;
         }
     }
 
@@ -55,5 +84,18 @@ public class PlayerMovement : MonoBehaviour
             GameController.Collect();
             Destroy(other.gameObject);
         }
+        else if (other.tag == "abismo")
+        {
+            GameController.MorteJogador();
+        }
     }
+    private void OnCollisionEnter2D(Collision2D colisao)
+    {
+        // Se o corpo em que batemos tem a tag Inimigo...
+        if (colisao.gameObject.tag == "inimigo")
+        {
+            GameController.MorteJogador();
+        }
+    }
+
 }

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - "colet\xE1vel"
+  - abismo
+  - inimigo
+  - borda
   layers:
   - Default
   - TransparentFX
