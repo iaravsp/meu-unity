@@ -4,7 +4,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
-    AudioSource audioPlin;
+
+    AudioSource meuAudioSource;
+    public AudioClip audioMorte;
 
     public float speed = 5f;
     public float jumpForce = 10f;
@@ -20,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioPlin = GetComponent<AudioSource>();
+        meuAudioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -80,12 +82,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "coletável")
         {
-            audioPlin.Play();
+            meuAudioSource.Play();
             GameController.Collect();
             Destroy(other.gameObject);
         }
         else if (other.tag == "abismo")
         {
+            meuAudioSource.PlayOneShot(audioMorte);
             GameController.MorteJogador();
         }
     }
@@ -94,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
         // Se o corpo em que batemos tem a tag Inimigo...
         if (colisao.gameObject.tag == "inimigo")
         {
+            meuAudioSource.PlayOneShot(audioMorte);
             GameController.MorteJogador();
         }
     }
